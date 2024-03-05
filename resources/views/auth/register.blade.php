@@ -36,6 +36,26 @@
                     <label for="password_confirmation" class="block text-gray-700">Confirmez le mot de passe:</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" required class="mt-1 p-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-password">
                 </div>
+                <div class="mb-6">
+                    
+
+<fieldset>
+  <legend class="sr-only">Countries</legend>
+
+  <div class="flex items-center mb-4">
+    <input id="country-option-1" type="radio" name="role" value="USA" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" checked>
+    <label for="role_Organisateur" class="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300">
+      Organisateur
+    </label>
+  </div>
+
+  <div class="flex items-center mb-4">
+    <input id="country-option-2" type="radio" name="role" value="Germany" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
+    <label for="country-spèctateur" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+    spèctateur
+    </label>
+  </div>
+                </div>
                 <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600">S'inscrire</button>
             </form>
         </div>
