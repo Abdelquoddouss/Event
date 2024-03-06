@@ -24,9 +24,11 @@ Route::get('/master',function () {
     return view('master');
 });
 
-Route::get('/dashboard',[UserController::class,'index'])->name('users.index');
-Route::delete('/dashboard/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+// Display the dashboard with the user list
 Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+// Handle user deletion
+Route::delete('/dashboard/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
 
 
 Route::resource('categories',CategorieController::class);

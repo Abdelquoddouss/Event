@@ -67,7 +67,7 @@
                                 <td>@foreach($u->roles as $role)
                                             {{ $role->name }}
                                         @endforeach</td>
-                                <td><form action="{{ route('user.destroy', $u->id) }}" method="post">
+                                <td><form action="{{ route('users.destroy', $u->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-500 hover:underline">Supprimer</button>

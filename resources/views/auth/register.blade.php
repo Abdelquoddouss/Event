@@ -43,18 +43,19 @@
   <legend class="sr-only">Countries</legend>
 
   <div class="flex items-center mb-4">
-    <input id="country-option-1" type="radio" name="role" value="USA" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" checked>
+    <input id="role_Organisateur" type="radio" name="role" value="organisateur" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" checked>
     <label for="role_Organisateur" class="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300">
       Organisateur
     </label>
-  </div>
+</div>
 
-  <div class="flex items-center mb-4">
-    <input id="country-option-2" type="radio" name="role" value="Germany" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
-    <label for="country-spèctateur" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-    spèctateur
+<div class="flex items-center mb-4">
+    <input id="role_Spectateur" type="radio" name="role" value="spectateur" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
+    <label for="role_Spectateur" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+    Spectateur
     </label>
-  </div>
+</div>
+
                 </div>
                 <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600">S'inscrire</button>
             </form>

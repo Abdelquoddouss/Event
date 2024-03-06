@@ -41,10 +41,10 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id); // Récupérer l'utilisateur à supprimer
+        $users = User::findOrFail($id); // Récupérer l'utilisateur à supprimer
     
-        $user->delete(); // Supprimer l'utilisateur
+        $users->delete(); // Supprimer l'utilisateur
     
-        return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès.');
+        return redirect()->route('dashboard')->with('success', 'Utilisateur supprimé avec succès.');
     }
 }
