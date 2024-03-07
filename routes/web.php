@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +25,19 @@ Route::get('/', function () {
 Route::get('/master',function () {
     return view('master');
 });
+
+Route::get('/Org',function () {
+    return view('Organisateur.dashbordOrg');
+});
+
+
+Route::resource('Event',EventController::class);
+
+Route::resource('AdminEvent',AdminEventController::class);
+// Nouvelles routes pour accepter et refuser un événement
+Route::get('/AdminEvent/{id}/accept', [AdminEventController::class, 'accept'])->name('AdminEvent.accept');
+Route::get('/AdminEvent/{id}/reject', [AdminEventController::class, 'reject'])->name('AdminEvent.reject');
+
 
 // Display the dashboard with the user list
 Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');

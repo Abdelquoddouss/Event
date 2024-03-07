@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('lieux');
             $table->string('place');
+            $table->integer('status')->default(0);
+            $table->date('date');
             $table->foreignId('categorie_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
