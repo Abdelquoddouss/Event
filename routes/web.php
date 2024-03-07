@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
 Route::get('/master',function () {
     return view('master');
@@ -35,6 +35,11 @@ Route::get('/Org',function () {
 });
 
 Route::get('/event', [AdminEventController::class, 'index2']);
+
+Route::get('/events', [UserController::class, 'search']);
+
+Route::get('/welcome', [UserController::class, 'index2'])->name('welcome.index2');
+
 
 
 

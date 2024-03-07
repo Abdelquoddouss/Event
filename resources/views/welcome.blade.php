@@ -248,56 +248,55 @@
 
 
 <section class="bg-white dark:bg-gray-900">
-    <div class="container px-6 py-12 mx-auto">
-        <h1 class="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">Portfolio</h1>
-
-        <div class="mt-8 xl:mt-16 lg:flex lg:-mx-12">
-            <div class="lg:mx-12">
-                <h1 class="text-xl font-semibold text-gray-800 dark:text-white">Table of Content</h1>
-
-                <div class="mt-4 space-y-4 lg:mt-8">
-                    <a href="#" class="block text-blue-500 dark:text-blue-400 hover:underline">Web design</a>
-                    <a href="#" class="block text-gray-500 dark:text-gray-300 hover:underline">App design</a>
-                    <a href="#" class="block text-gray-500 dark:text-gray-300 hover:underline">Branding</a>
-                    <a href="#" class="block text-gray-500 dark:text-gray-300 hover:underline">Animation</a>
-                </div>
+    <div class="container mx-auto px-4 py-12">
+        <h1 class="text-2xl font-semibold text-gray-800 dark:text-white lg:text-3xl">Events</h1>
+<!-- Bloc de la table des catégories en premier dans le code -->
+<div class="mb-8 xl:mt-16">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Table of Categories</h2>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @foreach ($categories as $category)
+        <!-- <div class=" cursor-pointer bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:text-white transform hover:scale-105 transition duration-500"> -->
+            <div class="category flex items-center justify-between hover:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300">
+                <span class="category_wrapper p-4 cursor-pointer text-lg font-semibold text-gray-800 dark:text-gray-200" data-categorie={{ $category->id }} >{{ $category->name }}</span>
+                <svg class="w-6 h-6 text-gray-800 dark:text-gray-200 hover:text-white dark:hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </div>
-
-            <div class="flex-1 mt-8 lg:mx-12 lg:mt-0">
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 ">
-                <div class="md:px-4 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0">
+        <!-- </div> -->
+        @endforeach
+    </div>
+</div>
+        <!-- Bloc des cartes d'événements après dans le code, mais affiché en premier visuellement -->
+        <div class="grid events-wrapper grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 mt-8">
+            @if(isset($events))
             @foreach ($events as $event)
-            <div class=" bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
-            <h3 class="mb-3 text-xl font-bold text-indigo-600">{{ $event->titre }}</h3>
-            <div class="relative">
-                <img class="w-full rounded-xl" src="{{ $event->getFirstMediaUrl('eventImage', 'thumb') }}" alt="Event Image" />
-                <p class="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">{{ $event->status === \App\Models\Event::STATUS_ACCEPTED ? 'Accepté' : '' }}</p>
-            </div>
-            <h1 class="mt-4 text-gray-800 text-2xl font-bold cursor-pointer">{{ Str::limit($event->description, 50) }}</h1>
-            <div class="my-4">
-                <div class="flex space-x-1 items-center">
-                <span>
-                    <!-- Icône ou information -->
-                </span>
-                <p>{{ $event->date }}</p>
-                </div>
-                <!-- Plus d'informations comme lieu, etc. -->
-                <button class="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Détails</button>
-            </div>
-            </div>
-            @endforeach
+<div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+    @if($event->getFirstMediaUrl('eventImage', 'thumb'))
+        <img class="w-full h-48 object-cover" src="{{ $event->getFirstMediaUrl('eventImage', 'thumb') }}" alt="Event Image">
+    @else
+        <!-- Affichez ici une image par défaut ou ajustez le layout -->
+        <div class="w-full h-48 bg-gray-200 flex justify-center items-center">
+            <span class="text-lg text-gray-500">Pas d'image disponible</span>
         </div>
+    @endif
+    <div class="px-6 py-4">
+        <h3 class="font-bold text-xl text-indigo-600 dark:text-indigo-400">{{ $event->titre }}</h3>
+        <p class="text-gray-700 dark:text-gray-300 text-base mt-2">{{ Str::limit($event->description, 100) }}</p>
+    </div>
+    <div class="px-6 pt-4 pb-2">
+        <span class="inline-block bg-yellow-200 dark:bg-yellow-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 dark:text-gray-900 mr-2 mb-2">{{ $event->status === \App\Models\Event::STATUS_ACCEPTED ? 'Accepté' : 'En attente' }}</span>
+        <span class="inline-block bg-gray-200 dark:bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 dark:text-gray-900 mr-2 mb-2">{{ $event->date }}</span>
+    </div>
+    <div class="px-6 pt-4 pb-4">
+        <button class="w-full bg-indigo-600 dark:bg-indigo-700 text-white py-2 rounded-xl hover:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300">Détails</button>
+    </div>
+</div>
+@endforeach
 
-                    
-
-                   
-                </div>
-            </div>
+            @else
+                <p class="col-span-3 text-center text-gray-800 dark:text-white">Aucun événement disponible.</p>
+            @endif
         </div>
     </div>
 </section>
-
-
 
 <footer class="bg-white dark:bg-gray-900">
     <div class="container px-6 py-12 mx-auto">
@@ -369,3 +368,65 @@
         </div>
     </div>
 </footer>
+
+
+<script>
+const categoriesWrapper = document.querySelectorAll('.category_wrapper');
+const eventsWrapper = document.querySelector('.events-wrapper');
+
+categoriesWrapper.forEach((el) => {
+    el.addEventListener('click', (e) => {
+        console.log(e.target.getAttribute('data-categorie'));
+        eventsWrapper.innerHTML = `
+            <div role="status" class="mx-auto absolute left-1/2 translate-x-[-50%]">
+                <svg aria-hidden="true" class="inline w-16 h-16 text-gray-200 animate-spin dark:text-gray-300 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                </svg>
+                <span class="sr-only">Loading...</span>
+            </div>
+        `;
+        fetchData(e.target.getAttribute('data-categorie'));
+    });
+});
+
+    const fetchData = (category_id) => {
+
+        const url = `http://127.0.0.1:8000/events?category_id=${category_id}`;
+
+    fetch(url)
+    .then( res => {
+        if(!res.ok) {
+        throw Error("can fetch the data from the back-end");
+        }
+        return res.json();
+    })
+    .then( events => {
+        eventsWrapper.innerHTML = '';
+        events.forEach(event => {
+     
+                
+
+            eventsWrapper.innerHTML += `
+            <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+            <img class="w-full h-48 object-cover" src="${event.image_url}" alt="Event Image">
+                    <div class="px-6 py-4">
+                        <h3 class="font-bold text-xl text-indigo-600 dark:text-indigo-400">${event.titre}</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-base mt-2">${event.description}</p>
+                    </div>
+                    <div class="px-6 pt-4 pb-2">
+                        <span class="inline-block bg-yellow-200 dark:bg-yellow-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 dark:text-gray-900 mr-2 mb-2">${event.status === 'accepté' ? 'Accepté' : 'En attente'}</span>
+                        <span class="inline-block bg-gray-200 dark:bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 dark:text-gray-900 mr-2 mb-2">${event.date}</span>
+                    </div>
+                    <div class="px-6 pt-4 pb-4">
+                        <button class="w-full bg-indigo-600 dark:bg-indigo-700 text-white py-2 rounded-xl hover:bg-indigo-500 dark:hover:bg-indigo-600 transition duration-300">Détails</button>
+                    </div>
+                </div>
+            `
+        });
+    })
+    .catch( err => {
+        console.log(err);
+    })
+    };
+</script>
