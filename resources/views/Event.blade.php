@@ -55,6 +55,15 @@
 
 <!-- component -->
 <div class="min-h-screen bg-gradient-to-tr from-red-300 to-yellow-200  py-20">
+<div class="container mx-auto">
+    <form action="{{ route('event.search') }}" method="GET">
+        <input type="text" name="search" placeholder="Rechercher des événements..." class="px-4 py-2 border rounded-md" />
+        <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded-md">Rechercher</button>
+    </form>
+</div>
+
+
+
     <div>
         <div class="md:px-4 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0">
             @foreach ($events as $event)
@@ -73,7 +82,7 @@
                 <p>{{ $event->date }}</p>
                 </div>
                 <!-- Plus d'informations comme lieu, etc. -->
-                <button class="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Détails</button>
+                <button href="{{ route('reservation.show', $event->id) }}" class="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Détails</button>
             </div>
             </div>
             @endforeach

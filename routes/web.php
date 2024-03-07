@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ Route::get('/Org',function () {
 Route::get('/event', [AdminEventController::class, 'index2']);
 
 Route::get('/events', [UserController::class, 'search']);
+Route::get('/event/search', [EventController::class, 'searchTitre'])->name('event.search');
+
 
 Route::get('/welcome', [UserController::class, 'index2'])->name('welcome.index2');
 
@@ -56,6 +59,7 @@ Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 // Handle user deletion
 Route::delete('/dashboard/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+Route::get('/reservation/{event}', [ReservationController::class,'show'])->name('reservation.show');
 
 
 Route::resource('categories',CategorieController::class);
@@ -63,6 +67,7 @@ Route::resource('categories',CategorieController::class);
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

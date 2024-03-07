@@ -84,4 +84,27 @@ class EventController extends Controller
 
     return redirect()->route('Event.index')->with('success', 'Event supprimée avec succès.');
     }
+
+
+
+
+public function searchTitre(Request $request)
+{
+    // Récupère la saisie de recherche de l'utilisateur
+    $searchTerm = $request->input('search');
+
+    // Recherche des événements dont le titre contient la saisie
+    $events = Event::query()
+    ->where('titre', 'LIKE', "%{$searchTerm}%")
+    ->paginate(10); // Assurez-vous d'ajuster le nombre par page selon vos besoins
+
+
+    // Retourne la vue avec les résultats de la recherche
+    return view('Event', compact('events'));
+}
+
+
+
+
+
 }
