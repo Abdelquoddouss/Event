@@ -14,6 +14,9 @@ class UserController extends Controller
         return view('Admin.index',compact('users'));
     }
 
+
+    
+
     public function create()
     {
         // Logique pour afficher le formulaire de création d'utilisateur

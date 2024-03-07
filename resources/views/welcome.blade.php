@@ -24,8 +24,8 @@
                 <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
                 <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white shadow-md lg:bg-transparent lg:dark:bg-transparent lg:shadow-none dark:bg-gray-900 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:w-auto lg:opacity-100 lg:translate-x-0">
                 <div class="-mx-4 lg:flex lg:items-center">
-    <a href="#" class="block mx-4 text-gray-700 capitalize dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">HOME</a>
-    <a href="#" class="block mx-4 mt-4 text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">Events</a>
+    <a href="/welcome" class="block mx-4 text-gray-700 capitalize dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">HOME</a>
+    <a href="/event" class="block mx-4 mt-4 text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">Events</a>
     <!-- Conditionally show links based on authentication status -->
     @if(Auth::check())
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block mx-4 mt-4 text-gray-700 capitalize lg:mt-0 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">Logout</a>
@@ -265,32 +265,32 @@
 
             <div class="flex-1 mt-8 lg:mx-12 lg:mt-0">
                 <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 ">
-                    <div>
-                        <img class="object-cover w-full rounded-lg h-96 "
-                            src="https://images.unsplash.com/photo-1621111848501-8d3634f82336?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1565&q=80"
-                            alt="">
-                        <h2 class="mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white">Best website
-                            collections</h2>
-                        <p class="mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400 ">Website</p>
-                    </div>
+                <div class="md:px-4 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0">
+            @foreach ($events as $event)
+            <div class=" bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
+            <h3 class="mb-3 text-xl font-bold text-indigo-600">{{ $event->titre }}</h3>
+            <div class="relative">
+                <img class="w-full rounded-xl" src="{{ $event->getFirstMediaUrl('eventImage', 'thumb') }}" alt="Event Image" />
+                <p class="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">{{ $event->status === \App\Models\Event::STATUS_ACCEPTED ? 'Accepté' : '' }}</p>
+            </div>
+            <h1 class="mt-4 text-gray-800 text-2xl font-bold cursor-pointer">{{ Str::limit($event->description, 50) }}</h1>
+            <div class="my-4">
+                <div class="flex space-x-1 items-center">
+                <span>
+                    <!-- Icône ou information -->
+                </span>
+                <p>{{ $event->date }}</p>
+                </div>
+                <!-- Plus d'informations comme lieu, etc. -->
+                <button class="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Détails</button>
+            </div>
+            </div>
+            @endforeach
+        </div>
 
-                    <div>
-                        <img class="object-cover w-full rounded-lg h-96 "
-                            src="https://images.unsplash.com/photo-1621609764180-2ca554a9d6f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-                            alt="">
-                        <h2 class="mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white">Block of Ui kit
-                            collections</h2>
-                        <p class="mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400 ">Ui kit</p>
-                    </div>
+                    
 
-                    <div>
-                        <img class="object-cover w-full rounded-lg h-96 "
-                            src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                            alt="">
-                        <h2 class="mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white">Ton’s of mobile
-                            mockup</h2>
-                        <p class="mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400 ">Mockups</p>
-                    </div>
+                   
                 </div>
             </div>
         </div>

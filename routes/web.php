@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -26,9 +26,16 @@ Route::get('/master',function () {
     return view('master');
 });
 
+// Route::get('/event',function () {
+//     return view('Event');
+// });
+
 Route::get('/Org',function () {
     return view('Organisateur.dashbordOrg');
 });
+
+Route::get('/event', [AdminEventController::class, 'index2']);
+
 
 
 Route::resource('Event',EventController::class);

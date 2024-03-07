@@ -12,9 +12,17 @@ class AdminEventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Event::paginate(4);
         return view('Admin.AcceptationEvent', compact('events')); 
        }
+
+
+       public function index2()
+{
+    // Récupère uniquement les événements avec le statut accepté
+    $events = Event::where('status', Event::STATUS_ACCEPTED)->paginate(6);
+    return view('Event', compact('events')); 
+}
 
 
 
