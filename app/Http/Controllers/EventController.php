@@ -26,25 +26,30 @@ class EventController extends Controller
         $events = Event::all();
         $categories = Categorie::all();
 
-
         return view('Organisateur.CreateEvent', compact('events','categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEvent $request)
-    {
-       
-        $event = Event::create($request->all());  
+    public function store(Request $request)
+    {    
+        $autoValue = $request->input('auto'); // Récupère la valeur de 'auto' envoyée par le formulaire
+    
+        // Ici, vous pouvez traiter différemment selon que 'auto' est à 1 ou à 0
+        // Par exemple, en ajustant le statut avant de sauvegarder l'événement
+        $eventData = $request->all();
+        $eventData['auto'] = $autoValue;
+    
+        $event = Event::create($eventData);  
         
         if($request->has("event_image")){
             $event->addMediaFromRequest("event_image")->toMediaCollection("eventImage");
         }
-
-
+    
         return redirect()->route('Event.index')->with('success', 'Événement ajouté avec succès');
     }
+    
 
     /**
      * Display the specified resource.

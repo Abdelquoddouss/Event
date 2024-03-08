@@ -82,7 +82,7 @@
                 <p>{{ $event->date }}</p>
                 </div>
                 <!-- Plus d'informations comme lieu, etc. -->
-                <button href="{{ route('reservation.show', $event->id) }}" class="mt-4 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Détails</button>
+                <a href="{{ route('reservation.show', $event->id) }}" class="mt-4 text-xl w-full text-center block text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Détails</a>
             </div>
             </div>
             @endforeach
@@ -103,21 +103,7 @@
 
 
 <footer class="bg-white dark:bg-gray-900">
-    <div class="container px-6 py-12 mx-auto">
-        <div class="md:flex md:-mx-3 md:items-center md:justify-between">
-            <h1 class="text-xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-2xl dark:text-white">Subscribe our newsletter to get update.</h1>
-            
-            <div class="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-                <a href="#" class="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-800 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                    <span>Sign Up Now</span>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-        
+    <div class="container px-6 py-12 mx-auto"> 
         <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700">
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

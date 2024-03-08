@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
@@ -60,6 +61,9 @@ Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 Route::delete('/dashboard/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/reservation/{event}', [ReservationController::class,'show'])->name('reservation.show');
+
+Route::post('/reservation/{id}', [ReservationController::class,'reserver'])->name('reservation');
+
 
 
 Route::resource('categories',CategorieController::class);

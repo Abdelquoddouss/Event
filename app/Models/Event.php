@@ -20,6 +20,7 @@ class Event extends Model implements HasMedia
         'status',
        'categorie_id',
        'date',
+       'auto',
     ];
 
 

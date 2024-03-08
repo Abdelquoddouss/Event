@@ -48,7 +48,7 @@
                         <input type="date" name="date" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" >
                     </div>
                     
-                    <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a partner</label>
+                    <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a categories</label>
                     <select id="categories" name="categorie_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="" selected disabled>Choose a categories</option>
                     @foreach($categories as $cat)
@@ -56,6 +56,17 @@
                     @endforeach
                 </select>
 
+                <div>
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type d'acceptation :</label>
+    <div class="flex items-center mb-4">
+        <input id="auto" name="auto" type="radio" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="auto" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acceptation automatique</label>
+    </div>
+    <div class="flex items-center mb-4">
+        <input id="manual" name="auto" type="radio" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="manual" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Validation manuelle</label>
+    </div>
+</div>
 
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" name="event_image" id="file_input" type="file">

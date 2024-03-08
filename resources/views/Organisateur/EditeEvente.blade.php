@@ -58,6 +58,18 @@
                     @endforeach
                 </select>
 
+                <div>
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type d'acceptation :</label>
+    <div class="flex items-center mb-4">
+        <input id="auto_accept" name="auto" type="radio" value="1" {{ $event->auto == 1 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="auto_accept" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Acceptation automatique</label>
+    </div>
+    <div class="flex items-center mb-4">
+        <input id="manual_validation" name="auto" type="radio" value="0" {{ $event->auto == 0 ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="manual_validation" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Validation manuelle</label>
+    </div>
+</div>
+
 
                 <!-- <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" name="img" id="file_input" type="file">
