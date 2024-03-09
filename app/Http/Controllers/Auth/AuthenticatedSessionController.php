@@ -24,21 +24,23 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-{
-    $request->authenticate();
+    {
+        $request->authenticate();
     
-    $request->session()->regenerate();
-
-    // Appeler directement la méthode `authenticated` n'est pas nécessaire si vous intégrez la logique ici
-    $user = Auth::user(); // Assurez-vous d'avoir l'utilisateur authentifié
-    if ($user->roles->contains('name', 'admin')) {
-        return redirect('/dashboard');
-    } elseif ($user->roles->contains('name', 'organisateur')) {
-        return redirect('/Event');
-    } else {
-        return redirect('/welcome'); // Ou toute autre route par défaut
+        $request->session()->regenerate();
+    
+        $user = Auth::user(); // Assurez-vous d'avoir l'utilisateur authentifié
+        if ($user->roles->contains('name', 'admin')) {
+            return redirect('/dashboard');
+        } elseif ($user->roles->contains('name', 'organisateur')) {
+            return redirect('/Event');
+        } elseif ($user->roles->contains('name', 'spectateur')) { // Vérifiez si l'utilisateur est un spectateur
+            return redirect('/welcome'); // Redirection vers la page de bienvenue pour les spectateurs
+        } else {
+            return redirect('/welcome'); // Ou toute autre route par défaut pour les utilisateurs sans rôle spécifique
+        }
     }
-}
+    
 
     /**
      * Destroy an authenticated session.

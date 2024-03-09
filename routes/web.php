@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::get('/welcome', function () {
+    return view('welcome'); 
+});
 
 
     Route::get('/event', [AdminEventController::class, 'index2']);

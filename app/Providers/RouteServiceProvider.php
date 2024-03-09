@@ -22,11 +22,12 @@ class RouteServiceProvider extends ServiceProvider
         if ($user->roles->contains('name', 'admin')) {
             return '/dashboard';
         } elseif ($user->roles->contains('name', 'organisateur')) {
-            return '/Org';
+            return '/Event';
+        } elseif ($user->roles->contains('name', 'spèctateur')) {
+            return '/welcome';
         }
-        // Ajoutez d'autres conditions selon les rôles
         return '/';
-    }
+    }    
     
 
     /**
