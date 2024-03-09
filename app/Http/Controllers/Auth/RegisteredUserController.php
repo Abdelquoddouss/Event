@@ -49,6 +49,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+// Utilisez la nouvelle méthode pour déterminer la redirection
+return redirect(RouteServiceProvider::determineHome($user));    }
 }

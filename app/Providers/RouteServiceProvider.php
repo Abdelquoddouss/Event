@@ -17,7 +17,17 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public static function determineHome($user)
+    {
+        if ($user->roles->contains('name', 'admin')) {
+            return '/dashboard';
+        } elseif ($user->roles->contains('name', 'organisateur')) {
+            return '/Org';
+        }
+        // Ajoutez d'autres conditions selon les rôles
+        return '/';
+    }
+    
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

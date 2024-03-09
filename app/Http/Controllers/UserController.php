@@ -44,30 +44,7 @@ class UserController extends Controller
     return view('welcome', compact('events', 'categories'));
     }
 
-    public function create()
-    {
-        // Logique pour afficher le formulaire de création d'utilisateur
-    }
-
-    public function store(Request $request)
-    {
-        // Logique pour traiter le formulaire de création d'utilisateur
-    }
-
-    public function show($id)
-    {
-        // Logique pour afficher les détails d'un utilisateur spécifique
-    }
-
-    public function edit($id)
-    {
-        // Logique pour afficher le formulaire de modification d'utilisateur
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Logique pour traiter le formulaire de modification d'utilisateur
-    }
+    
 
     public function destroy($id)
     {

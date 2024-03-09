@@ -20,59 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
-
-Route::get('/master',function () {
-    return view('master');
-});
-
-// Route::get('/event',function () {
-//     return view('Event');
-// });
-
-Route::get('/Org',function () {
-    return view('Organisateur.dashbordOrg');
-});
-
-Route::get('/event', [AdminEventController::class, 'index2']);
-
-Route::get('/events', [UserController::class, 'search']);
-Route::get('/event/search', [EventController::class, 'searchTitre'])->name('event.search');
-
-
-Route::get('/welcome', [UserController::class, 'index2'])->name('welcome.index2');
 
 
 
 
-Route::resource('Event',EventController::class);
-
-Route::resource('AdminEvent',AdminEventController::class);
-// Nouvelles routes pour accepter et refuser un événement
-Route::get('/AdminEvent/{id}/accept', [AdminEventController::class, 'accept'])->name('AdminEvent.accept');
-Route::get('/AdminEvent/{id}/reject', [AdminEventController::class, 'reject'])->name('AdminEvent.reject');
-
-
-// Display the dashboard with the user list
-Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-// Handle user deletion
-Route::delete('/dashboard/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
-Route::get('/reservation/{event}', [ReservationController::class,'show'])->name('reservation.show');
-
-Route::post('/reservation/{id}', [ReservationController::class,'reserver'])->name('reservation');
-
-Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
-
-Route::get('/reservations', [ReservationController::class, 'index']);
-
-Route::resource('categories',CategorieController::class);
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -80,5 +31,45 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+
+    Route::get('/event', [AdminEventController::class, 'index2']);
+    Route::get('/events', [UserController::class, 'search']);
+    Route::get('/event/search', [EventController::class, 'searchTitre'])->name('event.search');
+    Route::get('/welcome', [UserController::class, 'index2'])->name('welcome.index2');
+    Route::get('/reservation/{event}', [ReservationController::class,'show'])->name('reservation.show');
+    
+
+
+Route::group(['middleware' => ['isAdmin']], function () {
+    Route::get('/master',function () {
+        return view('master');
+    });
+    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::delete('/dashboard/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::resource('categories',CategorieController::class);
+    Route::resource('AdminEvent',AdminEventController::class);
+    Route::get('/AdminEvent/{id}/accept', [AdminEventController::class, 'accept'])->name('AdminEvent.accept');
+    Route::get('/AdminEvent/{id}/reject', [AdminEventController::class, 'reject'])->name('AdminEvent.reject');
+
+});
+
+
+
+Route::group(['middleware' => ['isOrganisateur']], function () {
+    Route::get('/Org',function () {
+        return view('Organisateur.dashbordOrg');
+    });
+    Route::resource('Event',EventController::class);
+    Route::post('/reservation/{id}', [ReservationController::class,'reserver'])->name('reservation');
+    Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+    Route::get('/reservations', [ReservationController::class, 'index']);
+
+});
+
+
+
 
 require __DIR__.'/auth.php';
