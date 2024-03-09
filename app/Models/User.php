@@ -53,8 +53,10 @@ class User extends Authenticatable implements HasMedia
 
 
 public function events()
-{
-    return $this->belongsToMany(Event::class); // Assurez-vous que la clé étrangère est correctement définie si nécessaire
-}
+    {
+        return $this->belongsToMany(Event::class, 'reservations')
+                    ->withPivot('status')
+                    ->withTimestamps();
+    }
 
 }

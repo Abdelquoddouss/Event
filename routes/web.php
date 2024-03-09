@@ -64,7 +64,9 @@ Route::get('/reservation/{event}', [ReservationController::class,'show'])->name(
 
 Route::post('/reservation/{id}', [ReservationController::class,'reserver'])->name('reservation');
 
+Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
 
+Route::get('/reservations', [ReservationController::class, 'index']);
 
 Route::resource('categories',CategorieController::class);
 

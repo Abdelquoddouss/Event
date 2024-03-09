@@ -34,4 +34,15 @@ class Event extends Model implements HasMedia
     {
         return $this->belongsTo(Categorie::class);
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'reservations')
+                    ->withPivot('status')
+                    ->withTimestamps();
+    }
 }

@@ -12,11 +12,20 @@ class Reservation extends Model
    
         protected $fillable = [
             'status',
-            'date',
-            'place',
             'event_id',
             'user_id',
         ];
         
-    
+
+        const STATUS_PENDING = 0; // En attente
+        const STATUS_ACCEPTED = 1; // Acceptée
+        const STATUS_REFUSED = 2; // Refusée
+    protected $attributes = [
+        'status' => self::STATUS_PENDING, // Utilisez la constante pour une meilleure lisibilité
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
