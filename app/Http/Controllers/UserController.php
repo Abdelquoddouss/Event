@@ -11,7 +11,6 @@ class UserController extends Controller
 {
     public function index()
     {
-       
         $users = User::with('roles')->get();
         return view('Admin.index',compact('users'));
     }
@@ -20,9 +19,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $category_id = $request->query('category_id');
-
         $events = Event::where('categorie_id', $category_id)->take(3)->get();
-        
         $eventData = [];
 
         foreach ($events as $event) {
@@ -48,10 +45,8 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $users = User::findOrFail($id); // Récupérer l'utilisateur à supprimer
-    
-        $users->delete(); // Supprimer l'utilisateur
-    
+        $users = User::findOrFail($id); 
+        $users->delete(); 
         return redirect()->route('dashboard')->with('success', 'Utilisateur supprimé avec succès.');
     }
 }

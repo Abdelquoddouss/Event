@@ -10,22 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // Dans App\Http\Controllers\EventController
-
     public function index()
     {
         $events = Event::where('created_by_user_id', Auth::id())->get();
         return view('Organisateur.AfficherEvent', compact('events'));
     }
-    
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $events = Event::all();
@@ -54,19 +44,7 @@ class EventController extends Controller
     return redirect()->route('Event.index')->with('success', 'Événement ajouté avec succès');
 }
 
-    
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $event = Event::findOrFail($id);
@@ -74,9 +52,6 @@ class EventController extends Controller
         return view('Organisateur.EditeEvente', compact('event','categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $events = Event::find($id);
@@ -84,14 +59,10 @@ class EventController extends Controller
         return redirect()->route('Event.index')->with('success', 'Project mis à jour avec succès.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $events = Event::findOrFail($id);
         $events->delete();
-
     return redirect()->route('Event.index')->with('success', 'Event supprimée avec succès.');
     }
 

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Storage;
 class ReservationController extends Controller
 {
 
-   
     public function index()
     {
         $events = Event::where('auto', 0)
@@ -27,24 +26,17 @@ class ReservationController extends Controller
     }
     
     
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+public function store(Request $request)
 {
     $request->validate([
         'event_id' => 'required|integer|exists:events,id',
         'user_id' => 'required|integer|exists:users,id',
         // Assurez-vous que 'status' est géré correctement selon votre logique d'application.
     ]);
-
     $reservation = new Reservation($request->all());
     $reservation->save();
-
     return redirect()->route('reservations.show', $reservation->id)
-                     ->with('success', 'Réservation créée avec succès.');
+                ->with('success', 'Réservation créée avec succès.');
 }
 
 
@@ -92,7 +84,7 @@ public function reserver(Request $request, $id)
     {
         $reservation = Reservation::findOrFail($id);
         $newStatus = $request->input('status');
-    
+
         switch ($newStatus) {
            case 'accepted':
     $reservation->status = Reservation::STATUS_ACCEPTED;
@@ -103,7 +95,6 @@ public function reserver(Request $request, $id)
 
     // Envoyer l'email sans le ticket attaché
     Mail::to($reservation->user->email)->send(new TicketMailable($reservation));
-
     break;
     
             case 'refused':
@@ -117,10 +108,6 @@ public function reserver(Request $request, $id)
             default:
                 return back()->with('error', 'Action inconnue.');
         }
-    
         return back()->with('success', $message);
     }
-    
-
-    
 }

@@ -7,18 +7,13 @@ use Illuminate\Http\Request;
 
 class CategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $categories = Categorie::all();
-         return view('Admin.AjouteCategorie', compact('categories')); // Include both variables
+        return view('Admin.AjouteCategorie', compact('categories')); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -32,14 +27,10 @@ class CategorieController extends Controller
         return redirect()->route('categories.index')->with('success', 'categorie ajoutée avec succès.');  
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $Categorie = Categorie::findOrFail($id);
         $Categorie->delete();
-
-    return redirect()->route('categories.index')->with('success', 'Ville supprimée avec succès.');
+        return redirect()->route('categories.index')->with('success', 'Ville supprimée avec succès.');
     }
 }
