@@ -44,21 +44,27 @@
 
                 <!-- Formulaire de réservation -->
                 <div class="mt-12 text-center">
-                <form action="{{ route('reservation', $event->id) }}" method="POST" class="w-full max-w-sm mx-auto">
-    @csrf
-    <div class="mb-4">
-        <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Réserver des places :</label>
-        <input id="quantity" type="number" value="1" name="quantity" min="1" class="border border-gray-300 text-center py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
-    </div>
-    <input type="hidden" name="auto" value="{{ $event->auto }}" />
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-        Réserver
-    </button>
-</form>
-
-                </div>
+                <form id="reservationForm" action="{{ route('reservation', $event->id) }}" method="POST" class="w-full max-w-sm mx-auto">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Réserver des places :</label>
+                        <input id="quantity" type="number" value="1" name="quantity" min="1" class="border border-gray-300 text-center py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <input type="hidden" name="auto" value="{{ $event->auto }}" />
+                    <button id="reserveButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Réserver
+                    </button>
+                </form>
+            </div>
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', function() {
+            const button = document.getElementById('reserveButton');
+            button.setAttribute('disabled', 'disabled');
+            button.innerText = 'Traitement...';
+        });
+    </script>
 </body>
 </html>

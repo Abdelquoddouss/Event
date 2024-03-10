@@ -20,6 +20,7 @@ class Reservation extends Model
         const STATUS_PENDING = 0; // En attente
         const STATUS_ACCEPTED = 1; // Acceptée
         const STATUS_REFUSED = 2; // Refusée
+
     protected $attributes = [
         'status' => self::STATUS_PENDING, // Utilisez la constante pour une meilleure lisibilité
     ];
@@ -28,4 +29,14 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+                    
+    }
+
+
+
 }

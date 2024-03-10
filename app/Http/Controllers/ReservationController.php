@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketMailable;
 use App\Models\Categorie;
 use App\Models\Event;
 use App\Models\Reservation;
@@ -16,13 +17,12 @@ class ReservationController extends Controller
    
     public function index()
     {
-        // Récupération des événements ajoutés manuellement ayant au moins une réservation
-        $events = Event::where('auto', 0) // Filtrer pour inclure uniquement les événements ajoutés manuellement
+        $events = Event::where('auto', 0)
+                       ->where('created_by_user_id', auth()->id()) // Utilisez 'created_by_user_id' ici
                        ->whereHas('reservations') // Assurez-vous qu'il y a au moins une réservation
                        ->with('reservations.user') // Précharger les réservations et les utilisateurs associés
                        ->get();
     
-        // Retourner la vue avec les événements filtrés
         return view('organisateur.Reservation', compact('events'));
     }
     
@@ -87,25 +87,36 @@ public function reserver(Request $request, $id)
     }
 
 
+    
     public function update(Request $request, $id)
     {
         $reservation = Reservation::findOrFail($id);
         $newStatus = $request->input('status');
     
         switch ($newStatus) {
-            case 'accepted':
-                $reservation->status = Reservation::STATUS_ACCEPTED;
-                $message = 'Vous avez accepté la réservation de ' . $reservation->user->name . '.';
-                break;
+           case 'accepted':
+    $reservation->status = Reservation::STATUS_ACCEPTED;
+    $message = 'Vous avez accepté la réservation de ' . $reservation->user->name . '.';
+
+    // Sauvegarder les modifications de la réservation
+    $reservation->save();
+
+    // Envoyer l'email sans le ticket attaché
+    Mail::to($reservation->user->email)->send(new TicketMailable($reservation));
+
+    break;
+    
             case 'refused':
                 $reservation->status = Reservation::STATUS_REFUSED;
                 $message = 'Vous avez refusé la réservation de ' . $reservation->user->name . '.';
+                
+                // Sauvegarder les modifications de la réservation
+                $reservation->save();
                 break;
+    
             default:
                 return back()->with('error', 'Action inconnue.');
         }
-    
-        $reservation->save();
     
         return back()->with('success', $message);
     }

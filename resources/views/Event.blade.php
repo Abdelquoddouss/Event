@@ -42,7 +42,7 @@
             </div>
         </div>
     </nav>
-    <div class="w-full bg-center bg-cover h-[38rem]" style="background-image: url('/img/event.webp');">
+    <div class="w-full bg-center bg-cover h-[38rem]" style="background-image: url('/img/ev.jpg');">
         <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
             <div class="text-center">
                 <h1 class="text-3xl font-semibold text-white lg:text-4xl">Build your new <span class="text-blue-400">Saas</span> Project</h1>

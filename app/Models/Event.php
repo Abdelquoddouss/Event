@@ -21,6 +21,7 @@ class Event extends Model implements HasMedia
        'categorie_id',
        'date',
        'auto',
+       'created_by_user_id',
     ];
 
 

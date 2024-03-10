@@ -44,6 +44,7 @@ Route::get('/welcome', function () {
     Route::get('/welcome', [UserController::class, 'index2'])->name('welcome.index2');
     Route::get('/reservation/{event}', [ReservationController::class,'show'])->name('reservation.show');
     
+    Route::post('/reservation/{id}', [ReservationController::class,'reserver'])->name('reservation');
 
 
 Route::group(['middleware' => ['isAdmin']], function () {
@@ -66,7 +67,6 @@ Route::group(['middleware' => ['isOrganisateur']], function () {
         return view('Organisateur.dashbordOrg');
     });
     Route::resource('Event',EventController::class);
-    Route::post('/reservation/{id}', [ReservationController::class,'reserver'])->name('reservation');
     Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::get('/reservations', [ReservationController::class, 'index']);
 

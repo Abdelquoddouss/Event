@@ -22,26 +22,31 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                @foreach($events as $event)
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{{ $event->id }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white"> <img class="w-[30px]" src="{{ $event->getFirstMediaUrl('eventImage') }}" alt="Event Image"></td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->titre }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->description }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->lieux }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->place }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->date }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->categorie->name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <a href="{{ route('Event.edit', $event->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-400">Modifier</a>
-                        <form action="{{ route('Event.destroy', $event->id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-900 dark:hover:text-red-400" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">Supprimer</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
+            @foreach($events as $event)
+<tr>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{{ $event->id }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+        <img class="w-[30px]" src="{{ $event->getFirstMediaUrl('eventImage') }}" alt="Event Image">
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->titre }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+        {{ Str::limit($event->description, 50, '...') }}
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->lieux }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->place }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->date }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $event->categorie->name }}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+        <a href="{{ route('Event.edit', $event->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-400">Modifier</a>
+        <form action="{{ route('Event.destroy', $event->id) }}" method="POST" class="inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-red-600 hover:text-red-900 dark:hover:text-red-400" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">Supprimer</button>
+        </form>
+    </td>
+</tr>
+@endforeach
+
             </tbody>
         </table>
     </div>

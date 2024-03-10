@@ -6,17 +6,22 @@ use App\Http\Requests\StoreEvent;
 use App\Models\Categorie;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    // Dans App\Http\Controllers\EventController
+
     public function index()
     {
-        $events = Event::all();
+        $events = Event::where('created_by_user_id', Auth::id())->get();
         return view('Organisateur.AfficherEvent', compact('events'));
     }
+    
+
 
     /**
      * Show the form for creating a new resource.
@@ -29,26 +34,26 @@ class EventController extends Controller
         return view('Organisateur.CreateEvent', compact('events','categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
-    {    
-        $autoValue = $request->input('auto'); // Récupère la valeur de 'auto' envoyée par le formulaire
+{    
+    $autoValue = $request->input('auto');
     
-        // Ici, vous pouvez traiter différemment selon que 'auto' est à 1 ou à 0
-        // Par exemple, en ajustant le statut avant de sauvegarder l'événement
-        $eventData = $request->all();
-        $eventData['auto'] = $autoValue;
+    $eventData = $request->all();
+    $eventData['created_by_user_id'] = Auth::id();
+    $eventData['auto'] = $autoValue;
+
+    // Ajoute l'ID de l'utilisateur connecté aux données de l'événement
+    $eventData['user_id'] = Auth::id();
+    $event = Event::create($eventData);
     
-        $event = Event::create($eventData);  
-        
-        if($request->has("event_image")){
-            $event->addMediaFromRequest("event_image")->toMediaCollection("eventImage");
-        }
-    
-        return redirect()->route('Event.index')->with('success', 'Événement ajouté avec succès');
+    // Ajoute l'image de l'événement, si elle est présente dans la requête
+    if($request->hasFile("event_image")){
+        $event->addMediaFromRequest("event_image")->toMediaCollection("eventImage");
     }
+    return redirect()->route('Event.index')->with('success', 'Événement ajouté avec succès');
+}
+
     
 
     /**

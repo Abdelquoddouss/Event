@@ -42,7 +42,7 @@
             </div>
         </div>
     </nav>
-    <div class="w-full bg-center bg-cover h-[38rem]" style="background-image: url('/img/event.webp');">
+    <div class="w-full bg-center bg-cover h-[38rem]" style="background-image: url('/img/ev.jpg');">
         <div class="flex items-center justify-center w-full h-full bg-gray-900/40">
             <div class="text-center">
                 <h1 class="text-3xl font-semibold text-white lg:text-4xl">Build your new <span class="text-blue-400">Saas</span> Project</h1>
@@ -63,7 +63,7 @@
             </h1>
 
             <div class="mt-10 lg:mt-20 lg:flex lg:items-center">
-                <img class="object-cover object-center w-full lg:w-[32rem] rounded-lg h-96" src="/img/ttt.webp" alt="">
+                <img class="object-cover object-center w-full lg:w-[32rem] rounded-lg h-96" src="/img/event.webp" alt="">
 
                 <div class="mt-8 lg:px-10 lg:mt-0">
                     <h1 class="text-2xl font-semibold text-gray-800 dark:text-white lg:w-72">
